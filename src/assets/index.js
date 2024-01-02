@@ -1,0 +1,16 @@
+export { default as Figma } from './figma.png';
+export { default as ChatGPT } from './ChatGPT.png';
+export { default as CSS } from './css.png';
+export { default as HTML } from './html.png';
+export { default as Git } from './git.png';
+export { default as Mu5 } from './mu5.png';
+export { default as Node } from './node.png';
+export { default as TypeScript } from './typeScript.png';
+export { default as JavaScript } from './javascript.png';
+export { default as Tailwind } from './tailwindCSS.png';
+export { default as Sass } from './sass.png';
+export { default as Reactt } from './react.png';
+export { default as Sanity } from './sanity.png';
+export { default as Next } from './nextjs.png';
+export { default as Project1 } from './project.png';
+export { default as ProfileImg } from './profile.png';

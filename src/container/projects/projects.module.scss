@@ -1,0 +1,26 @@
+.projectContainer {
+  .filterBtnsContainer {
+    gap: 1rem;
+    flex-wrap: wrap;
+    button {
+      background-color: var(--light-grey);
+      transition: background-color 0.5s ease-in, color 0.5s ease-in-out;
+
+      &:hover,
+      &.active {
+        background-color: var(--white-primary);
+        color: var(--grey);
+      }
+    }
+  }
+
+  .projectsPortfolio {
+    flex-wrap: wrap;
+    gap: 4rem;
+    justify-content: center;
+
+    @media screen and (max-width: 687px) {
+      gap: 2rem;
+    }
+  }
+}
