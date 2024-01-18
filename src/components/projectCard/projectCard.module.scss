@@ -43,6 +43,9 @@
     }
 
     &:hover {
+      img{
+        opacity: 0;
+      }
       .about {
         height: max-content;
         opacity: 1;

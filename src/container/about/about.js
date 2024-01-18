@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import styles from './about.module.scss';
 import AppWrap from '@/wrapper/appWrap';
 import MotionWrap from '@/wrapper/wrapper';
-import aboutDetails from '../../utils/aboutme';
 import TitleHeader from '@/components/titleHeader/titleHeader';
 import { client } from '../../../sanity/lib/client';
 import { useEffect, useState } from 'react';
