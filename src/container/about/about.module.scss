@@ -14,13 +14,13 @@
         h3 {
           font-size: 0.8rem;
           font-weight: 600;
-          color: rgba(128, 128, 128, 0.5);
+          color: var(--grey);
           margin-bottom: 0.5rem;
         }
         p {
           text-align: justify;
           a {
-            color: var(--white-primary);
+            color: var(--text);
             text-decoration-line: underline;
             font-weight: 300;
           }

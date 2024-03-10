@@ -8,9 +8,12 @@
   flex-direction: column;
   row-gap: 1.3rem;
   border-radius: 20px;
+  box-shadow: var(--card);
+  transition: 0.5s ease-in-out;
 
   &:hover {
-    box-shadow: 0 0 25px rgba(139, 139, 139, 0.452);
+    box-shadow: 2px 2px 12px rgba(139, 139, 139, 0.452);
+
   }
 
   .image {
@@ -75,7 +78,7 @@
   }
 
   p {
-    color: var(--white-primary);
+    color: var(--text);
     line-height: 1.5;
     font-size: 0.85rem;
     transition: opacity 0.5s ease-in-out;
@@ -91,7 +94,7 @@
     transition: opacity 0.5s ease-in-out;
 
     a {
-      color: var(--white-primary);
+      color: var(--text);
       transition: transform 0.5s ease-in-out;
       svg {
         font-size: 1.57rem;

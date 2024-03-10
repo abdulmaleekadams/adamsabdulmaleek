@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { FiSun } from 'react-icons/fi';
+import { FiMoon, FiSun } from 'react-icons/fi';
 import { BsList } from 'react-icons/bs';
 import { useState } from 'react';
 
@@ -9,7 +9,7 @@ import styles from './navigation.module.scss';
 import { navLinks, socialPageLinks } from '@/utils/naviLinks';
 import NavigationLinks from './navigationLinks';
 import SocialLinks from './socialLinks';
-
+import { useTheme } from '../ThemeContext';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +28,8 @@ const Navigation = () => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  const { pageTheme, toggleTheme } = useTheme();
 
   return (
     <header className={styles.header}>
@@ -71,8 +73,8 @@ const Navigation = () => {
 
             <hr />
 
-            <button id='theme'>
-              <FiSun />
+            <button id='theme' onClick={toggleTheme}>
+              {pageTheme === 'dark' ? <FiSun /> : <FiMoon />}
             </button>
           </div>
         </div>

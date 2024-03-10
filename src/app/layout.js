@@ -1,8 +1,7 @@
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.scss';
-import Navigation from '@/components/navigation/navigation';
-import Footer from '@/container/footer/footer';
+import clsx from 'clsx';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,10 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <Navigation />
+      <body className={clsx(inter.className)}>
         {children}
-        <Footer />
         <Analytics />
       </body>
     </html>

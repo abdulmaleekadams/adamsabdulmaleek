@@ -89,6 +89,7 @@ const Contact = () => {
             buttonStyle={'bg-fill'}
             buttonType={'submit'}
             buttonText='Send'
+            classNames={styles.sendBtn}
           />
         </form>
       </div>

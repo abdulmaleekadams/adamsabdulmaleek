@@ -3,13 +3,14 @@
     gap: 1rem;
     flex-wrap: wrap;
     button {
+      box-shadow: var(--card);
       background-color: var(--light-grey);
       transition: background-color 0.5s ease-in, color 0.5s ease-in-out;
 
       &:hover,
       &.active {
         background-color: var(--white-primary);
-        color: var(--grey);
+        color: var(--black-primary);
       }
     }
   }
