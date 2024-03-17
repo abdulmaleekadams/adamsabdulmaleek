@@ -71,6 +71,7 @@
 
         .navLink {
           text-transform: capitalize;
+          transition: all 0.5s;
 
           svg {
             display: none;
@@ -78,6 +79,7 @@
 
           &:hover {
             color: var(--white-secondary);
+            transform: scale(0.95);
           }
         }
       }

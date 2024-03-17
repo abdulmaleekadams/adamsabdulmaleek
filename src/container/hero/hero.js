@@ -54,7 +54,13 @@ const Hero = () => {
             whileInView={scaleVariants.whileInView}
             className={clsx(styles.button, 'flex')}
           >
-            <Button buttonStyle={'bg-fill'} buttonText='See my resume' />
+            <Button
+              buttonStyle={'bg-fill'}
+              href={
+                'https://drive.google.com/file/d/1iLggv_3hfg6c3DENZIs7BbA7Ke-M1jT0/view?usp=sharing'
+              }
+              buttonText='See my resume'
+            />
             <Button
               buttonStyle={'border-fill'}
               buttonText='Get in touch'

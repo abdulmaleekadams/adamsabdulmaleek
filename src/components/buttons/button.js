@@ -15,7 +15,8 @@ const Button = ({
       className={clsx(styles[buttonStyle], styles.btn, classNames)}
       value={buttonText}
       type={buttonType}
-      href={href}
+      href={ href }
+      target='_blank'
     >
       {buttonText}
     </ButtonElement>

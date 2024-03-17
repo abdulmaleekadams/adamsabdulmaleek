@@ -14,9 +14,27 @@ const projectSchema = {
       type: 'string',
     },
     {
+      name: 'stack',
+      title: 'Stack Description',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      title: 'Project Type',
+      type: 'string',
+    },
+    {
       name: 'previewLink',
       title: 'Preview Link',
       type: 'string',
+    },
+    {
+      name: 'previewImage',
+      title: 'Preview Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     },
     {
       name: 'repoLink',

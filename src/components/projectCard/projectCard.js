@@ -3,6 +3,7 @@ import styles from './projectCard.module.scss';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { urlForImage } from '../../../sanity/lib/image';
 
 const ProjectCard = ({
   type,
@@ -10,37 +11,44 @@ const ProjectCard = ({
   imgUrl,
   stackDescription,
   projectDescription,
+  previewLink,
+  repoLink,
 }) => {
   return (
     <div className={styles.projectCard}>
-      <div className={clsx(styles.image)}>
-        <Image unoptimized={true} fill={true} src={imgUrl} alt={title} />
-        <p className={clsx(styles.filterType)}>{type}</p>
+      <div className={styles.details}>
+        <div className={clsx(styles.image)}>
+          <Image unoptimized={true} fill={true} src={urlForImage(imgUrl).url()} alt={title} />
+          <p className={clsx(styles.filterType)}>{type}</p>
+        </div>
 
-        <div className={clsx(styles.about)}>
-          <p>{projectDescription}</p>
+        <h4>{title}</h4>
+        <p>{stackDescription && stackDescription.substring(0, 90)}</p>
+        <div className={clsx(styles.link, 'flex')}>
+          {repoLink && (
+            <motion.a
+              whileInView={{ scale: [0, 1] }}
+              transition={{ duration: 0.25 }}
+              viewport={{ once: true }}
+              target='_blank'
+              href={repoLink}
+            >
+              <AiOutlineGithub />
+            </motion.a>
+          )}
+          <motion.a
+            whileInView={{ scale: [0, 1] }}
+            transition={{ duration: 0.25 }}
+            viewport={{ once: true }}
+            target='_blank'
+            href={previewLink}
+          >
+            <AiOutlineLink />
+          </motion.a>
         </div>
       </div>
-
-      <h4>{title}</h4>
-      <p>{stackDescription.substring(0, 90)}</p>
-      <div className={clsx(styles.link, 'flex')}>
-        <motion.a
-          whileInView={{ scale: [0, 1] }}
-          transition={{ duration: 0.25 }}
-          viewport={{ once: true }}
-          href='#'
-        >
-          <AiOutlineGithub />
-        </motion.a>
-        <motion.a
-          whileInView={{ scale: [0, 1] }}
-          transition={{ duration: 0.25 }}
-          viewport={{ once: true }}
-          href='#'
-        >
-          <AiOutlineLink />
-        </motion.a>
+      <div className={clsx(styles.about)}>
+        <p>{projectDescription}</p>
       </div>
     </div>
   );

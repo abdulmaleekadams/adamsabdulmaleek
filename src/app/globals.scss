@@ -5,14 +5,14 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --black-secondary: #1c1c22;
+  --black-secondary: #fdfdfd;
   --black-primary: #ffffff;
 
   --gradient: linear-gradient(45deg, #b16cea, #ff5e69, #ff8a56, #ffa84b);
 
   --text: #030303;
 
-  --white-secondary: #ffffff;
+  --white-secondary: #bb020e;
   --white-primary: #020202;
 
   --grey: #202020;
@@ -40,7 +40,11 @@ body.dark {
   --deep-dark-bg: #0d0d0d;
 
   --white-primary: #f0f2f5;
+  --white-secondary: #ffffff;
+
   --black-primary: #161513;
+  --black-secondary: #1c1c22;
+
 }
 
 * {
