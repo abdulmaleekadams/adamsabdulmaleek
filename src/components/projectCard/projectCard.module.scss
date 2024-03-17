@@ -13,49 +13,75 @@
 
   &:hover {
     box-shadow: 2px 2px 12px rgba(139, 139, 139, 0.452);
+
   }
 
-  .details {
+  .image {
+    flex-shrink: 0;
+    height: 230px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 1.3rem;
-    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 20px;
 
-    .image {
-      flex-shrink: 0;
-      height: 230px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
+    img {
+      background: black;
+      object-fit: cover;
       border-radius: 20px;
+    }
 
-      img {
-        background: black;
-        object-fit: cover;
-        border-radius: 20px;
+    .filterType {
+      position: absolute;
+      bottom: 0;
+      background: var(--grey);
+      color: var(--white-secondary);
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+
+      width: max-content;
+      padding: 10px 10px 0;
+    }
+
+    &:hover {
+      img{
+        opacity: 0;
       }
-
-      .filterType {
-        position: absolute;
-        bottom: 0;
-        background: var(--grey);
-        color: var(--white-secondary);
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
-
-        width: max-content;
-        padding: 10px 10px 0;
+      .about {
+        opacity: 1;
       }
     }
-    
-    p {
+
+    &:hover ~ * {
+      opacity: 0;
+    }
+  }
+
+  .about {
+    position: absolute;
+    background-color: rgba(7, 7, 7, 0.863);
+
+    height: 100%;
+    width: 100%;
+    top: 0;
+    color: #ffffff;
+
+    border-radius: 20px;
+    padding: 10px;
+
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    overflow: hidden;
+  }
+
+  p {
     color: var(--text);
     line-height: 1.5;
     font-size: 0.85rem;
     transition: opacity 0.5s ease-in-out;
+
   }
   .link {
     position: absolute;
@@ -72,30 +98,10 @@
       svg {
         font-size: 1.57rem;
       }
-      
+
       &:hover {
         transform: scale(0.9) !important;
       }
     }
-  }
-}
-
-  .about {
-    position: absolute;
-    background-color: rgb(7, 7, 7);
-
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    color: #ffffff;
-
-    border-radius: 20px;
-    padding: 10px;
-
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    overflow: hidden;
-    z-index: -1;
   }
 }

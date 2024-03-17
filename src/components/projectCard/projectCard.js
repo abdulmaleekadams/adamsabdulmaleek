@@ -16,39 +16,42 @@ const ProjectCard = ({
 }) => {
   return (
     <div className={styles.projectCard}>
-      <div className={styles.details}>
-        <div className={clsx(styles.image)}>
-          <Image unoptimized={true} fill={true} src={urlForImage(imgUrl).url()} alt={title} />
-          <p className={clsx(styles.filterType)}>{type}</p>
+      <div className={clsx(styles.image)}>
+        <Image
+          unoptimized={true}
+          fill={true}
+          src={urlForImage(imgUrl).url()}
+          alt={title}
+        />
+        <p className={clsx(styles.filterType)}>{type}</p>
+        <div className={clsx(styles.about)}>
+          <p>{projectDescription}</p>
         </div>
+      </div>
 
-        <h4>{title}</h4>
-        <p>{stackDescription && stackDescription.substring(0, 90)}</p>
-        <div className={clsx(styles.link, 'flex')}>
-          {repoLink && (
-            <motion.a
-              whileInView={{ scale: [0, 1] }}
-              transition={{ duration: 0.25 }}
-              viewport={{ once: true }}
-              target='_blank'
-              href={repoLink}
-            >
-              <AiOutlineGithub />
-            </motion.a>
-          )}
+      <h4>{title}</h4>
+      <p>{stackDescription && stackDescription.substring(0, 90)}</p>
+      <div className={clsx(styles.link, 'flex')}>
+        {repoLink && (
           <motion.a
             whileInView={{ scale: [0, 1] }}
             transition={{ duration: 0.25 }}
             viewport={{ once: true }}
             target='_blank'
-            href={previewLink}
+            href={repoLink}
           >
-            <AiOutlineLink />
+            <AiOutlineGithub />
           </motion.a>
-        </div>
-      </div>
-      <div className={clsx(styles.about)}>
-        <p>{projectDescription}</p>
+        )}
+        <motion.a
+          whileInView={{ scale: [0, 1] }}
+          transition={{ duration: 0.25 }}
+          viewport={{ once: true }}
+          target='_blank'
+          href={previewLink}
+        >
+          <AiOutlineLink />
+        </motion.a>
       </div>
     </div>
   );
