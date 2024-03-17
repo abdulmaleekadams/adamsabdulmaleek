@@ -31,13 +31,14 @@
       background: black;
       object-fit: cover;
       border-radius: 20px;
+      border: 1px solid black;
     }
 
     .filterType {
       position: absolute;
       bottom: 0;
       background: var(--grey);
-      color: var(--white-secondary);
+      color: white;
       border-top-right-radius: 10px;
       border-top-left-radius: 10px;
 
