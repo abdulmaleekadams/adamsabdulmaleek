@@ -16,28 +16,40 @@ import { client } from '../../../sanity/lib/client';
 
 const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState('All');
+  const [filterWork, setFilterWork] = useState([]);
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-
   const [projectsData, setProjectsData] = useState([]);
+
   useEffect(() => {
     const projectsQuery = '*[_type == "projects"]';
-    client.fetch(projectsQuery).then((data) => setProjectsData(data));
+    client.fetch(projectsQuery).then((data) => {
+      setProjectsData(data);
+      setFilterWork(data);
+    });
   }, []);
 
-  console.log(projectsData);
-
   const filterProjects = (e) => {
-    setSelectedFilter(e.target.value);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
+    const selectedCategory = e.target.value;
+
+    setSelectedFilter(selectedCategory);
+
+    setAnimateCard({ y: 100, opacity: 0 });
 
     setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+      let filteredProjects = [];
 
-      //   if (item === 'All') {
-      //     setFilterWork(works);
-      //   } else {
-      //     setFilterWork(works.filter((work) => work.tags.includes(item)));
-      //   }
+      if (selectedCategory === 'All') {
+        // If 'All' is selected, show all projects
+        filteredProjects = projectsData;
+      } else {
+        filteredProjects = projectsData.filter((project) =>
+          project.tags.includes(selectedCategory)
+        );
+      }
+
+      setFilterWork(filteredProjects);
+
+      setAnimateCard({ y: 0, opacity: 1 });
     }, 500);
   };
 
@@ -49,16 +61,14 @@ const Projects = () => {
       />
 
       <div className={clsx(styles.filterBtnsContainer, 'flex')}>
-        {['UI/UX', 'Web App', 'Backend Dev.', 'Frontend Dev.', 'All'].map(
-          (item) => (
-            <Button
-              key={item}
-              classNames={selectedFilter === item ? clsx(styles.active) : ''}
-              handleClick={filterProjects}
-              buttonText={item}
-            />
-          )
-        )}
+        {['UI/UX', 'Web App', 'Backend', 'Frontend', 'All'].map((item) => (
+          <Button
+            key={item}
+            classNames={selectedFilter === item ? clsx(styles.active) : ''}
+            handleClick={filterProjects}
+            buttonText={item}
+          />
+        ))}
       </div>
 
       <motion.div
@@ -66,7 +76,7 @@ const Projects = () => {
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className={clsx(styles.projectsPortfolio, 'flex')}
       >
-        {projectsData.map((project) => (
+        {filterWork.map((project) => (
           <ProjectCard
             title={project.title}
             imgUrl={project.previewImage}
@@ -76,6 +86,8 @@ const Projects = () => {
             key={project._id}
             repoLink={project.repoLink}
             previewLink={project.previewLink}
+            responsiveness={project.responsive}
+            status={project.status}
           />
         ))}
       </motion.div>

@@ -13,6 +13,8 @@ const ProjectCard = ({
   projectDescription,
   previewLink,
   repoLink,
+  status,
+  responsiveness
 }) => {
   return (
     <div className={styles.projectCard}>
@@ -31,6 +33,14 @@ const ProjectCard = ({
 
       <h4>{title}</h4>
       <p>{stackDescription && stackDescription.substring(0, 90)}</p>
+      <div className={styles.buildInfo}>
+        <p>
+          Responsiveness: {responsiveness}
+        </p>
+        <p>
+          Status: {status}
+        </p>
+      </div>
       <div className={clsx(styles.link, 'flex')}>
         {repoLink && (
           <motion.a

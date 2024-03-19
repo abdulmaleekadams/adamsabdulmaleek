@@ -1,7 +1,7 @@
 .projectCard {
   position: relative;
   width: 280px;
-  height: 440px;
+  height: 500px;
   background-color: var(--light-grey);
   padding: 1.5rem;
   display: flex;
@@ -52,6 +52,7 @@
       }
       .about {
         opacity: 1;
+        height: max-content;
       }
     }
 
@@ -105,4 +106,10 @@
       }
     }
   }
+}
+
+.buildInfo{
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
 }

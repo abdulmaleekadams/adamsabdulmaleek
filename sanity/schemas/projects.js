@@ -42,6 +42,16 @@ const projectSchema = {
       type: 'string',
     },
     {
+      name: 'responsive',
+      title: 'Responsiveness',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+    },
+    {
       name: 'tags',
       title: 'Tags',
       type: 'array',
