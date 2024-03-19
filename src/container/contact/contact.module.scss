@@ -117,5 +117,10 @@
 .sendBtn{
   background-color:#e20b1a ;
   color: #fff;
+
+  &:disabled{
+  background-color:#d1555d ;
+
+  }
 }
 

@@ -7,6 +7,7 @@ const Button = ({
   buttonStyle,
   classNames,
   href,
+  disabled
 }) => {
   const ButtonElement = href ? 'a' : 'button';
   return (
@@ -17,6 +18,7 @@ const Button = ({
       type={buttonType}
       href={ href }
       target='_blank'
+      disabled={disabled}
     >
       {buttonText}
     </ButtonElement>

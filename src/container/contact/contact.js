@@ -5,9 +5,8 @@ import styles from './contact.module.scss';
 import MotionWrap from '@/wrapper/wrapper';
 import TitleHeader from '@/components/titleHeader/titleHeader';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
 import Button from '@/components/buttons/button';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   FaEnvelope,
   FaGithubSquare,
@@ -15,8 +14,11 @@ import {
   FaWhatsappSquare,
 } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef();
+
   const [formDetails, setFormDetails] = useState({
     name: '',
     email: '',
@@ -30,6 +32,34 @@ const Contact = () => {
 
   const handleInput = (e) => {
     setFormDetails({ ...setFormDetails, [e.target.name]: e.target.value });
+  };
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        form.current,
+        {
+          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+        }
+      )
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          setFormDetails({
+            name: '',
+            email: '',
+            subject: '',
+            message: '',
+          });
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        }
+      );
   };
 
   return (
@@ -48,12 +78,12 @@ const Contact = () => {
 
           <p>New message</p>
         </div>
-        <form className='flex' method='post'>
+        <form className='flex' ref={form} onSubmit={sendMessage}>
           <label htmlFor='email' className='flex'>
             Email
             <input
               onChange={handleInput}
-              name='email'
+              name='user_email'
               value={formDetails.email}
               placeholder='Enter your email address'
             />
@@ -83,6 +113,7 @@ const Contact = () => {
               onKeyDown={handleTextareaHeight}
               value={formDetails.message}
               placeholder='Write a message'
+              name='message'
             ></textarea>
           </div>
           <Button
@@ -131,3 +162,5 @@ const Contact = () => {
 };
 
 export default AppWrap(MotionWrap(Contact, 'contact'), 'contact');
+
+
