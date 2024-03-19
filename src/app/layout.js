@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.scss';
 import clsx from 'clsx';
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
       <body className={clsx(inter.className)}>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
