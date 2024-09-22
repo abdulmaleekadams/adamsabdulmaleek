@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import ModalProvider from "@/provider/modal-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
@@ -29,7 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ModalProvider>{children}</ModalProvider>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

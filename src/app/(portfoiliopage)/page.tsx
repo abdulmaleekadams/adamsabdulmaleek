@@ -1,5 +1,5 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { About, Contact, Hero, Projects, Skills } from "@/container";
+import { Hero, Projects } from "@/container";
 import { FaHome } from "react-icons/fa";
 
 export default function Home() {
@@ -16,10 +16,8 @@ export default function Home() {
           ]}
         />
         <Hero />
-        <About />
-        <Skills />
+        {/* <About /> */}
         <Projects />
-        <Contact />
       </div>
     </main>
   );
