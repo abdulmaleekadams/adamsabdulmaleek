@@ -56,11 +56,11 @@ const About = () => {
           )}
         >
           <Image
-            src="/assets/images/avatar.png"
+            src="/assets/images/grid2.png"
             width={200}
             height={150}
             alt="avatar"
-            className="w-full sm:w-[276px] grayscale h-fit object-contain"
+            className="w-full sm:h-[300px] h-fit object-contain"
           />
           <div className="group-hover/bento:translate-x-2 transition duration-200">
             <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-xl">
