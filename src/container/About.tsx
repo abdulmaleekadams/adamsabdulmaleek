@@ -26,7 +26,7 @@ const About = () => {
         {/* Meeee */}
         <div
           className={cn(
-            "row-span-1 col-span-1 xl:row-span-3 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black-100 dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col gap-4"
+            "row-span-1 col-span-1 xl:row-span-3 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-card  border border-accent justify-between flex flex-col gap-4"
           )}
         >
           <div className="flex-1 items-center justify-center flex">
@@ -52,7 +52,7 @@ const About = () => {
         {/* Tech stack*/}
         <div
           className={cn(
-            "row-span-1 col-span-1 xl:row-span-3  rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black-100 dark:border-white/[0.2] bg-white border border-transparent justify-between items-center flex flex-col gap-4"
+            "row-span-1 col-span-1 xl:row-span-3  rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-card  border border-accent justify-between items-center flex flex-col gap-4"
           )}
         >
           <Image
@@ -76,7 +76,7 @@ const About = () => {
         {/* Globe */}
         <div
           className={cn(
-            "row-span-1 col-span-1 xl:row-span-4  rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black-100 dark:border-white/[0.2] bg-white border border-transparent justify-between flex flex-col space-y-4"
+            "row-span-1 col-span-1 xl:row-span-4  rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-card  border border-accent justify-between flex flex-col space-y-4"
           )}
         >
           <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
@@ -120,7 +120,7 @@ const About = () => {
         {/* Passion */}
         <div
           className={cn(
-            " xl:col-span-2 xl:row-span-3 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black-100 dark:border-white/[0.2] bg-white border border-transparent justify-between items-center flex flex-col gap-4"
+            " xl:col-span-2 xl:row-span-3 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-card  border border-accent justify-between items-center flex flex-col gap-4"
           )}
         >
           <Image
@@ -146,7 +146,7 @@ const About = () => {
         {/* Contact */}
         <div
           className={cn(
-            " xl:col-span-1 xl:row-span-2 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black-100 dark:border-white/[0.2] bg-white border border-transparent justify-between items-center flex flex-col gap-4"
+            " xl:col-span-1 xl:row-span-2 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-card  border border-accent justify-between items-center flex flex-col gap-4"
           )}
         >
           <Image
