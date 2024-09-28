@@ -1,4 +1,5 @@
 "use client";
+import { useWindowSize } from "@/hooks/useWindowSize";
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -10,14 +11,15 @@ interface TimelineEntry {
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const screen = useWindowSize();
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height - 284);
+      setHeight(rect.height - 50);
     }
-  }, [ref]);
+  }, [ref, screen]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

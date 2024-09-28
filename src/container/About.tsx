@@ -21,7 +21,7 @@ const About = () => {
   };
 
   return (
-    <section className="relative">
+    <section className="relative" id="about">
       <div className="grid md:grid-cols-2 xl:grid-cols-3 xl:grid-rows-6 grid-cols-1 gap-5 h-full">
         {/* Meeee */}
         <div
