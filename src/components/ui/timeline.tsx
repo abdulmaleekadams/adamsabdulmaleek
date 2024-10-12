@@ -2,13 +2,14 @@
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import { ExpQueryResult } from "../../../sanity.types";
 
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+export const Timeline = ({ data }: { data: ExpQueryResult }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const screen = useWindowSize();
@@ -44,9 +45,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-        {data.map((item, index) => (
+        {data.map(({ works, year, _id }, index) => (
           <div
-            key={index}
+            key={_id}
             className="flex justify-start pt-10 md:pt-40 md:gap-10"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
@@ -54,15 +55,24 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
               </div>
               <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500 dark:text-neutral-500 ">
-                {item.title}
+                {year}
               </h3>
             </div>
-
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
               <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
-                {item.title}
+                {year}
               </h3>
-              {item.content}{" "}
+              <div className="space-y-6">
+                {works?.map(({ company, contribution, role }) => (
+                  <div key={`${company}-${role}-${year}`}>
+                    <p className="text-neutral-800 dark:text-neutral-200 text-xl font-medium">
+                      {role}
+                    </p>
+                    <p className="font-medium text-sm mt-2 mb-5">{company}</p>
+                    <div>{contribution}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}

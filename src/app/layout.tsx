@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import ModalProvider from "@/provider/modal-provider";
+import TanstackQueryClientProvider from "@/provider/TanstackQueryClientProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
@@ -30,7 +31,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ModalProvider>{children}</ModalProvider>
+          <TanstackQueryClientProvider>
+            <ModalProvider>{children}</ModalProvider>
+          </TanstackQueryClientProvider>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

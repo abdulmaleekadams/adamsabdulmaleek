@@ -43,8 +43,13 @@ const About = () => {
               Hi, I'm Adams
             </div>
             <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
-              With 3 years of experience, I have honed my skills in frontend and
-              backend development, with a focus on animated 3D website
+              With three years of experience, I have refined my skills in
+              frontend and backend development, while continuing to learn 3D
+              development. As a self-taught developer, I have gained invaluable
+              expertise in React.js, Next.js, Tailwind CSS, Node.js, Sanity CMS,
+              MongoDB, and PostgreSQL. This has enabled me to build secure,
+              seamless web applications with efficient data handling and
+              engaging user experiences.
             </div>
           </div>
         </div>
