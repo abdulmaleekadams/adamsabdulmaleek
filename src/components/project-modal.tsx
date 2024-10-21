@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 type Props = {
   children?: React.ReactNode;
   defaultOpen?: boolean;
-  setCurrentIndex?: (index: number) => void;
+  setCurrentIndex: (index: number) => void;
   isMobile: () => boolean;
   carouselRef: React.RefObject<HTMLDivElement>;
 };
@@ -32,7 +32,7 @@ const ProjectModal = ({
       handleScrollToNextItem();
       // Close the modal
       setClose();
-      setModalCurrentIndex(undefined);
+      setModalCurrentIndex(-1);
     }
   };
 
