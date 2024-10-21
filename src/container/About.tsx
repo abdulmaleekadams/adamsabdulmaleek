@@ -2,10 +2,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getAbout } from "@/sanity/lib/sanity.queries";
+import { PortableText } from "@portabletext/react";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import Globe from "react-globe.gl";
-import { FaCheck, FaCopy } from "react-icons/fa6";
+import { FaGithub, FaLinkedinIn, FaRegEnvelope } from "react-icons/fa6";
 import { RiRadioButtonLine } from "react-icons/ri";
 
 const About = () => {
@@ -18,6 +21,20 @@ const About = () => {
     setTimeout(() => {
       setHasCopied(false);
     }, 2000);
+  };
+
+  const { data: about, isLoading } = useQuery({
+    queryKey: ["abouts"],
+    queryFn: () => getAbout(),
+  });
+
+  if (isLoading) return null;
+
+  if (!about) return null;
+
+  console.log(about);
+  const findByKey = (key: string) => {
+    return about.find((section) => section.key === key);
   };
 
   return (
@@ -40,16 +57,10 @@ const About = () => {
           </div>
           <div className="group-hover/bento:translate-x-2 transition duration-200">
             <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 text-xl">
-              Hi, I'm Adams
+              {findByKey("about")?.title}
             </div>
-            <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
-              With three years of experience, I have refined my skills in
-              frontend and backend development, while continuing to learn 3D
-              development. As a self-taught developer, I have gained invaluable
-              expertise in React.js, Next.js, Tailwind CSS, Node.js, Sanity CMS,
-              MongoDB, and PostgreSQL. This has enabled me to build secure,
-              seamless web applications with efficient data handling and
-              engaging user experiences.
+            <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300 ">
+              <PortableText value={findByKey("about")?.content!} />
             </div>
           </div>
         </div>
@@ -69,11 +80,10 @@ const About = () => {
           />
           <div className="group-hover/bento:translate-x-2 transition duration-200">
             <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-xl">
-              Tech stack
+              {findByKey("stack")?.title}
             </div>
             <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300 w-full">
-              I specialize in a variety of languages, frameworks, and tools that
-              allow me to build robust and scalable applications
+              <PortableText value={findByKey("stack")?.content!} />
             </div>
           </div>
         </div>
@@ -105,12 +115,11 @@ const About = () => {
             />
           </div>
           <div>
-            <p className="text-lg font-semibold">
+            <p className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-xl ">
               I’m very flexible with time zone communications & locations
             </p>
-            <p className="grid-subtext">
-              I&apos;m based in Abuja, Nigeria and open to remote work
-              worldwide.
+            <p className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300 w-full">
+              <PortableText value={findByKey("location")?.content!} />
             </p>
             <Button
               className="w-full mt-10 bg-black-200 text-white-100 gap-2"
@@ -137,14 +146,12 @@ const About = () => {
             className="w-full sm:h-[266px]  h-fit object-contain"
           />
           <div className="group-hover/bento:translate-x-2 transition duration-200">
-            <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-xl ">
-              My Passion for Coding
-            </div>
-            <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300 w-full">
-              I love solving problems and building things through code.
-              Programming isn&apos;t just my profession—it&apos;s my passion. I
-              enjoy exploring new technologies, and enhancing my skills.
-            </div>
+            <p className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-xl ">
+              {findByKey("passion")?.title}
+            </p>
+            <p className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300 w-full">
+              <PortableText value={findByKey("passion")?.content!} />
+            </p>
           </div>
         </div>
 
@@ -166,16 +173,17 @@ const About = () => {
             <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2 w-full text-center">
               Contact me
             </div>
-            <div
-              className="font-sans font-normal text-xl w-full flex items-center gap-2 text-gray_gradient"
-              onClick={handleCopy}
-            >
-              {hasCopied ? (
-                <FaCheck size={20} className="text-green-800" />
-              ) : (
-                <FaCopy size={20} className="text-gray-400" />
-              )}
-              harbdulmaleek@gmail.com
+
+            <div className="flex gap-3">
+              <Button variant="outline" className="h-10 w-10 rounded-full p-0">
+                <FaGithub className="w-5 h-5" />
+              </Button>
+              <Button variant="outline" className="h-10 w-10 rounded-full p-0">
+                <FaLinkedinIn className="w-5 h-5 " />
+              </Button>
+              <Button variant="outline" className="h-10 w-10 rounded-full p-0">
+                <FaRegEnvelope className="w-5 h-5" />
+              </Button>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ export default defineType({
     {
       name: "contribution",
       title: "Contribution",
-      type: "string",
+      type: "blockContent",
     },
     {
       name: "company",

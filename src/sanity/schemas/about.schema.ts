@@ -6,6 +6,11 @@ export default defineType({
   type: "document",
   fields: [
     {
+      name: "key",
+      title: "Key",
+      type: "string",
+    },
+    {
       name: "title",
       title: "Title",
       type: "string",
@@ -13,7 +18,7 @@ export default defineType({
     {
       name: "content",
       title: "Content",
-      type: "string",
+      type: "blockContent",
     },
   ],
 });

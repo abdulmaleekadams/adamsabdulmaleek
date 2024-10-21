@@ -1,5 +1,6 @@
 "use client";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { PortableText } from "@portabletext/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { ExpQueryResult } from "../../../sanity.types";
@@ -69,7 +70,9 @@ export const Timeline = ({ data }: { data: ExpQueryResult }) => {
                       {role}
                     </p>
                     <p className="font-medium text-sm mt-2 mb-5">{company}</p>
-                    <div>{contribution}</div>
+                    <div className="*:list-disc contribution-list">
+                      <PortableText value={contribution!} />
+                    </div>
                   </div>
                 ))}
               </div>

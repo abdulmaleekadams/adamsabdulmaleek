@@ -131,7 +131,7 @@ export type WorkExp = {
   _updatedAt: string;
   _rev: string;
   role?: string;
-  contribution?: string;
+  contribution?: BlockContent;
   company?: string;
 };
 
@@ -144,7 +144,7 @@ export type Exp = {
   year?: string;
   works?: Array<{
     role?: string;
-    contribution?: string;
+    contribution?: BlockContent;
     company?: string;
     _type: "workExp";
     _key: string;
@@ -177,6 +177,17 @@ export type Projects = {
   responsive?: string;
   status?: string;
   tags?: Array<string>;
+};
+
+export type About = {
+  _id: string;
+  _type: "about";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  key?: string;
+  title?: string;
+  content?: BlockContent;
 };
 
 export type SanityImageCrop = {
@@ -236,21 +247,11 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type About = {
-  _id: string;
-  _type: "about";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  content?: string;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | BlockContent | Skills | WorkExp | Exp | Projects | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | About;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | BlockContent | Skills | WorkExp | Exp | Projects | About | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/sanity.queries.ts
 // Variable: projectsQuery
-// Query: *[_type == "projects"] | order(createdAt desc)
+// Query: *[_type == "projects"] | order(_createdAt desc)
 export type ProjectsQueryResult = Array<{
   _id: string;
   _type: "projects";
@@ -278,8 +279,20 @@ export type ProjectsQueryResult = Array<{
   status?: string;
   tags?: Array<string>;
 }>;
+// Variable: aboutQuery
+// Query: *[_type == "about"] | order(_createdAt desc)
+export type AboutQueryResult = Array<{
+  _id: string;
+  _type: "about";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  key?: string;
+  title?: string;
+  content?: BlockContent;
+}>;
 // Variable: expQuery
-// Query: *[_type == "exp"] | order(createdAt desc)
+// Query: *[_type == "exp"] | order(_createdAt desc)
 export type ExpQueryResult = Array<{
   _id: string;
   _type: "exp";
@@ -289,7 +302,7 @@ export type ExpQueryResult = Array<{
   year?: string;
   works?: Array<{
     role?: string;
-    contribution?: string;
+    contribution?: BlockContent;
     company?: string;
     _type: "workExp";
     _key: string;
@@ -300,7 +313,8 @@ export type ExpQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"projects\"] | order(createdAt desc)": ProjectsQueryResult;
-    "*[_type == \"exp\"] | order(createdAt desc)": ExpQueryResult;
+    "*[_type == \"projects\"] | order(_createdAt desc)": ProjectsQueryResult;
+    "*[_type == \"about\"] | order(_createdAt desc)": AboutQueryResult;
+    "*[_type == \"exp\"] | order(_createdAt desc)": ExpQueryResult;
   }
 }
