@@ -37,7 +37,7 @@ export const ProjectCard = ({
   card: ProjectsQueryResult[0];
   index: number;
   layout?: boolean;
-  setCurrentIndex?: (index: number) => void;
+  setCurrentIndex: (index: number) => void;
   isMobile: () => boolean;
   carouselRef: React.RefObject<HTMLDivElement>;
 }) => {
