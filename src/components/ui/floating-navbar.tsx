@@ -6,82 +6,144 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetClose,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-export const FloatingNav = ({
-  navItems,
-  className,
-}: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
-  className?: string;
-}) => {
+const navLinks = [
+  { name: "Work", link: "#work" },
+  { name: "Experience", link: "#experience" },
+  { name: "Capabilities", link: "#capabilities" },
+  { name: "About", link: "#about" },
+  { name: "Contact", link: "#contact" },
+];
+
+export const FloatingNav = ({ className }: { className?: string }) => {
   const { scrollYProgress } = useScroll();
-
-  // set true for the initial state so that nav bar is visible in the hero section
   const [visible, setVisible] = useState(true);
+  const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
+      const direction = current - scrollYProgress.getPrevious()!;
 
       if (scrollYProgress.get() < 0.05) {
-        // also set true for the initial state
         setVisible(true);
       } else {
-        if (direction < 0) {
-          setVisible(true);
-        } else {
-          setVisible(false);
-        }
+        setVisible(direction < 0);
       }
     }
   });
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (open) setOpen(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [open]);
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+
   return (
     <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
+      <motion.nav
+        initial={{ opacity: 1, y: -100 }}
+        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
         className={cn(
-          "flex bg-accent max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
+          "fixed inset-x-0 top-0 z-[5000] w-full border-b border-border/40 bg-background/80 backdrop-blur-md",
           className
         )}
-        style={{
-          backdropFilter: "blur(16px) saturate(180%)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.125)",
-        }}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link
-            key={`link=${idx}`}
-            href={navItem.link}
-            className={cn(
-              "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-            )}
+            href="/"
+            className="text-sm font-semibold tracking-tight text-foreground"
           >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            {/* add !cursor-pointer */}
-            {/* remove hidden sm:block for the mobile responsive */}
-            <span className=" text-sm !cursor-pointer">{navItem.name}</span>
+            Adams Abdulmaleek
           </Link>
-        ))}
-      </motion.div>
+
+          {/* Desktop links + theme toggle */}
+          <div className="hidden items-center gap-6 md:flex">
+            {navLinks.map((item) => (
+              <Link
+                key={item.name}
+                href={item.link}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {item.name}
+              </Link>
+            ))}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+            )}
+          </div>
+
+          {/* Mobile: theme toggle + sheet */}
+          <div className="flex items-center gap-4 md:hidden">
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+            )}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="flex flex-col gap-1.5"
+                  aria-label="Toggle menu"
+                >
+                  <span className="block h-px w-5 bg-foreground" />
+                  <span className="block h-px w-5 bg-foreground" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-64">
+                <nav className="mt-8 flex flex-col gap-6">
+                  {navLinks.map((item) => (
+                    <SheetClose asChild key={item.name}>
+                      <Link
+                        href={item.link}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {item.name}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </motion.nav>
     </AnimatePresence>
   );
 };

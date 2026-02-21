@@ -1,41 +1,50 @@
 "use client";
-import { ProjectCard } from "@/components/project-card";
-import { CardCarousel } from "@/components/ui/card-carousel";
-import { getProjects } from "@/sanity/lib/sanity.queries";
+import { CaseStudyCard } from "@/components/case-study-card";
+import { AnimateIn } from "@/components/animate-in";
+import { Section } from "@/components/ui/section";
+import { SectionHeading } from "@/components/ui/section-heading";
+import {
+  getFeaturedProjects,
+  getProjects,
+} from "@/sanity/lib/sanity.queries";
 import { useQuery } from "@tanstack/react-query";
-import { useRef, useState } from "react";
 
 const Projects = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => getProjects(),
+  const { data: featured } = useQuery({
+    queryKey: ["featured-projects"],
+    queryFn: () => getFeaturedProjects(),
   });
 
-  if (!data || isLoading) return null;
+  const { data: allProjects } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+    enabled: featured?.length === 0 || !featured,
+  });
 
-  const isMobile = () => {
-    return window && window.innerWidth < 768;
-  };
+  const projects = featured && featured.length > 0 ? featured : allProjects;
 
-  const cards = data?.map((card, index) => (
-    <ProjectCard
-      setCurrentIndex={setCurrentIndex}
-      carouselRef={carouselRef}
-      isMobile={isMobile}
-      key={card._id}
-      card={card}
-      index={index}
-    />
-  ));
+  if (!projects || projects.length === 0) return null;
 
   return (
-    <section className="w-full h-full py-20 relative" id="projects">
-      <h2 className="heading">My Selected Work</h2>
-      <CardCarousel carouselRef={carouselRef} items={cards} />
-    </section>
+    <Section id="work">
+      <SectionHeading
+        title="Selected Work"
+        subtitle="I don't just write code. I solve business problems with software."
+      />
+
+      <AnimateIn>
+        <div className="relative">
+          {/* Right fade */}
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-background to-transparent" />
+
+          <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide pr-6">
+            {projects.map((project) => (
+              <CaseStudyCard key={project._id} project={project} />
+            ))}
+          </div>
+        </div>
+      </AnimateIn>
+    </Section>
   );
 };
 

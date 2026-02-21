@@ -177,6 +177,12 @@ export type Projects = {
   responsive?: string;
   status?: string;
   tags?: Array<string>;
+  problem?: string;
+  role?: string;
+  techDecisions?: BlockContent;
+  impact?: string;
+  featured?: boolean;
+  order?: number;
 };
 
 export type About = {
@@ -278,6 +284,12 @@ export type ProjectsQueryResult = Array<{
   responsive?: string;
   status?: string;
   tags?: Array<string>;
+  problem?: string;
+  role?: string;
+  techDecisions?: BlockContent;
+  impact?: string;
+  featured?: boolean;
+  order?: number;
 }>;
 // Variable: aboutQuery
 // Query: *[_type == "about"] | order(_createdAt desc)
@@ -314,6 +326,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"projects\"] | order(_createdAt desc)": ProjectsQueryResult;
+    "*[_type == \"projects\" && featured == true] | order(order asc)": ProjectsQueryResult;
     "*[_type == \"about\"] | order(_createdAt desc)": AboutQueryResult;
     "*[_type == \"exp\"] | order(_createdAt desc)": ExpQueryResult;
   }

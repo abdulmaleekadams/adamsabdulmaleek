@@ -12,11 +12,19 @@ const projectsQuery = defineQuery(
   `*[_type == "projects"] | order(_createdAt desc)`
 );
 
+const featuredProjectsQuery = defineQuery(
+  `*[_type == "projects" && featured == true] | order(order asc)`
+);
+
 const aboutQuery = defineQuery(`*[_type == "about"] | order(_createdAt desc)`);
 const expQuery = defineQuery(`*[_type == "exp"] | order(_createdAt desc)`);
 
 export const getProjects = async (): Promise<ProjectsQueryResult> => {
   return await client.fetch(projectsQuery);
+};
+
+export const getFeaturedProjects = async (): Promise<ProjectsQueryResult> => {
+  return await client.fetch(featuredProjectsQuery);
 };
 
 export const getExperience = async (): Promise<ExpQueryResult> => {

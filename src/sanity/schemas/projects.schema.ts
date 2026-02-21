@@ -65,5 +65,42 @@ export default defineType({
         },
       ],
     },
+    {
+      name: "problem",
+      title: "Problem",
+      type: "text",
+      description: "The business or technical problem this project solves",
+    },
+    {
+      name: "role",
+      title: "Role",
+      type: "string",
+      description: 'Your role on this project, e.g. "Lead Engineer"',
+    },
+    {
+      name: "techDecisions",
+      title: "Tech Decisions",
+      type: "blockContent",
+      description: "Key technical choices made during the project",
+    },
+    {
+      name: "impact",
+      title: "Impact",
+      type: "text",
+      description: "Quantifiable outcomes and results",
+    },
+    {
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      description: "Show this project on the homepage",
+      initialValue: false,
+    },
+    {
+      name: "order",
+      title: "Display Order",
+      type: "number",
+      description: "Order in which to display on homepage (lower = first)",
+    },
   ],
 });
